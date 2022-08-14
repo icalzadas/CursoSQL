@@ -82,8 +82,9 @@ CREATE TABLE [Escuela].[Semestres](
 		[id_lic] ASC
 	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
 )
+--Hasta aqui lo cree yo (Ivan)--Gruposif EXISTS(select * from sysobjects where type = 'U' and name = 'Grupos' )	DROP TABLE [Escuela].[Grupos]CREATE TABLE [Escuela].[Grupos](	id_grupo INT IDENTITY(1,1) PRIMARY KEY NOT NULL,	nombre VARCHAR(30) NOT NULL)
+--Materiasif EXISTS(select * from sysobjects where type = 'U' and name = 'Materias' )	DROP TABLE [Escuela].[Materias]CREATE TABLE [Escuela].[Materias](	id_materia INT IDENTITY(1,1) PRIMARY KEY NOT NULL,	id_semestre INT CONSTRAINT FK_Materias_Semestres FOREIGN KEY (id_semestre) REFERENCES [Escuela].[Semestres](id_semestre),	id_grupo INT CONSTRAINT FK_Materias_Grupos FOREIGN KEY (id_grupo) REFERENCES [Escuela].[Grupos](id_grupo),	nombre VARCHAR(20) NOT NULL)
 
---Hasta aqui lo cree yo (Ivan)
 
 
 
